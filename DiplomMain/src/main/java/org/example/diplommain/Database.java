@@ -25,7 +25,7 @@ public class Database {
 
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
-                int num = resultSet.getInt("num");
+                double num = resultSet.getDouble("num");
                 dataList.add(new DataModel(id, num));
             }
         } catch (SQLException e) {

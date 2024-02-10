@@ -13,5 +13,7 @@
             <TableColumn fx:id="numColumn" prefWidth="75.0" text="Column X" />
          </columns></TableView>
       <Button id="buttonGetInfo" fx:id="buttonGetInfo" layoutX="45.0" layoutY="74.0" mnemonicParsing="false" onAction="#loadData" text="Get Info" />
+      <Button fx:id="getFirstCalculation" layoutX="134.0" layoutY="74.0" mnemonicParsing="false" onAction="#getCalculation1" text="Button" />
+      <Button fx:id="getSecondCalculation" layoutX="222.0" layoutY="74.0" mnemonicParsing="false" text="Button" />
    </children>
 </AnchorPane>
