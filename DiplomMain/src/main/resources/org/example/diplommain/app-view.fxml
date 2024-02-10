@@ -12,6 +12,6 @@
             <TableColumn fx:id="idColumn" prefWidth="75.0" text="Column X" />
             <TableColumn fx:id="numColumn" prefWidth="75.0" text="Column X" />
          </columns></TableView>
-      <Button id="buttonGetInfo" fx:id="buttonGetInfo" layoutX="45.0" layoutY="74.0" mnemonicParsing="false" onAction="get" text="Get Info" />
+      <Button id="buttonGetInfo" fx:id="buttonGetInfo" layoutX="45.0" layoutY="74.0" mnemonicParsing="false" onAction="#loadData" text="Get Info" />
    </children>
 </AnchorPane>
