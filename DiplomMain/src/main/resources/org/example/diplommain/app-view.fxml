@@ -1,37 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.diplommain.AppController">
    <children>
-      <TextField fx:id="textField1" layoutX="41.0" layoutY="31.0" onKeyTyped="#ChekInput" prefHeight="25.0" prefWidth="86.0" promptText="Number" AnchorPane.leftAnchor="40.0" />
-      <TextField fx:id="textField2" layoutX="155.0" layoutY="31.0" onKeyTyped="#ChekInput2" prefHeight="25.0" prefWidth="86.0" promptText="Number" AnchorPane.leftAnchor="160.0" />
-      <TextField fx:id="textField3" layoutX="274.0" layoutY="31.0" onKeyTyped="#ChekInput3" prefHeight="25.0" prefWidth="86.0" promptText="Number" AnchorPane.leftAnchor="280.0" />
-      <TextField fx:id="textField4" layoutX="380.0" layoutY="31.0" onKeyTyped="#ChekInput4" prefHeight="25.0" prefWidth="86.0" promptText="Number" AnchorPane.leftAnchor="400.0" />
-      <TextField fx:id="textField5" layoutX="514.0" layoutY="31.0" onKeyTyped="#ChekInput5" prefHeight="25.0" prefWidth="86.0" promptText="Number" AnchorPane.leftAnchor="520.0" />
-      <TextField fx:id="textField6" layoutX="643.0" layoutY="31.0" onKeyTyped="#ChekInput6" prefHeight="25.0" prefWidth="86.0" promptText="Number" AnchorPane.leftAnchor="640.0" />
-      <TextField fx:id="textField7" layoutX="738.0" layoutY="31.0" onKeyTyped="#ChekInput7" prefHeight="25.0" prefWidth="86.0" promptText="Number" AnchorPane.leftAnchor="760.0" />
-      <TextField fx:id="textField8" layoutX="40.0" layoutY="83.0" onKeyTyped="#ChekInput8" prefHeight="25.0" prefWidth="86.0" promptText="Number" AnchorPane.leftAnchor="40.0" />
-      <TextField fx:id="textField9" layoutX="154.0" layoutY="83.0" onKeyTyped="#ChekInput9" prefHeight="25.0" prefWidth="86.0" promptText="Number" AnchorPane.leftAnchor="160.0" />
-      <TextField fx:id="textField10" layoutX="273.0" layoutY="83.0" onKeyTyped="#ChekInput10" prefHeight="25.0" prefWidth="86.0" promptText="Number" AnchorPane.leftAnchor="280.0" />
-      <TextField fx:id="textField11" layoutX="379.0" layoutY="83.0" onKeyTyped="#ChekInput11" prefHeight="25.0" prefWidth="86.0" promptText="Number" AnchorPane.leftAnchor="400.0" />
-      <TextField fx:id="textField12" layoutX="513.0" layoutY="83.0" onKeyTyped="#ChekInput12" prefHeight="25.0" prefWidth="86.0" promptText="Number" AnchorPane.leftAnchor="520.0" />
-      <TextField fx:id="textField13" layoutX="642.0" layoutY="83.0" onKeyTyped="#ChekInput13" prefHeight="25.0" prefWidth="86.0" promptText="Number" AnchorPane.leftAnchor="640.0" />
-      <TextField fx:id="textField14" layoutX="737.0" layoutY="83.0" onKeyTyped="#ChekInput14" prefHeight="25.0" prefWidth="86.0" promptText="Number" AnchorPane.leftAnchor="760.0" />
-      <Label fx:id="Label1" layoutX="16.0" layoutY="684.0" text="Label" />
-      <Label fx:id="Label2" layoutX="13.0" layoutY="709.0" text="Label2" />
-      <TableView id="tableView" fx:id="tableView" layoutX="14.0" layoutY="149.0" prefHeight="212.0" prefWidth="1172.0" AnchorPane.bottomAnchor="437.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="151.0" />
-      <Button id="buttonInput" layoutX="1097.0" layoutY="31.0" mnemonicParsing="false" onAction="#onButClck" text="Input" />
-      <TableView id="tableView1" fx:id="tableView1" layoutX="18.0" layoutY="427.0" prefHeight="200.0" prefWidth="1161.0">
-        <columns>
-          <TableColumn id="id" fx:id="id" prefWidth="75.0" text="C1" />
-          <TableColumn id="num" fx:id="num" prefWidth="75.0" text="C2" />
-        </columns>
-      </TableView>
+      <TableView id="tableViewInfo" fx:id="tableViewInfo" layoutX="45.0" layoutY="182.0" prefHeight="578.0" prefWidth="1091.0">
+         <columns>
+            <TableColumn fx:id="idColumn" prefWidth="75.0" text="Column X" />
+            <TableColumn fx:id="numColumn" prefWidth="75.0" text="Column X" />
+         </columns></TableView>
+      <Button id="buttonGetInfo" fx:id="buttonGetInfo" layoutX="45.0" layoutY="74.0" mnemonicParsing="false" onAction="get" text="Get Info" />
    </children>
 </AnchorPane>
