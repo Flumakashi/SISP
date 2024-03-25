@@ -4,30 +4,49 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class DataModel {
-    private final IntegerProperty id;
-    private final DoubleProperty num;
 
-    public DataModel(int id, double num) {
-        this.id = new SimpleIntegerProperty(id);
-        this.num = new SimpleDoubleProperty(num);
+    private ObservableList<DataEntry> dataList = FXCollections.observableArrayList();
+
+    public ObservableList<DataEntry> getDataList() {
+        return dataList;
     }
 
-    public int getId() {
-        return id.get();
+    public void addDataEntry(DataEntry entry) {
+        dataList.add(entry);
+    }
+    public void clearDataList(){
+        dataList.clear();
     }
 
-    public double getNum() {
-        return num.get();
-    }
+    public static class DataEntry{
+        private IntegerProperty id;
+        private DoubleProperty num;
 
-    public IntegerProperty getIdProperty() {
-        return id;
-    }
+        public DataEntry(int id, double num) {
+            this.id = new SimpleIntegerProperty(id);
+            this.num = new SimpleDoubleProperty(num);
+        }
 
-    public DoubleProperty getNumProperty() {
-        return num;
-    }
+        public int getId() {
+            return id.get();
+        }
 
+        public double getNum() {
+            return num.get();
+        }
+
+
+        public IntegerProperty getIdProperty() {
+            return id;
+        }
+
+        public DoubleProperty getNumProperty() {
+            return num;
+        }
+
+    }
 }

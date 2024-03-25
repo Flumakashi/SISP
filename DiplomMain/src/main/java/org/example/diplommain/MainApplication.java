@@ -19,11 +19,10 @@ public class MainApplication extends Application {
 
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("app-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
-        stage.setTitle("Hello!");
+        stage.setTitle("SISP");
         stage.setScene(scene);
         stage.show();
 
     }
-
 
 }
