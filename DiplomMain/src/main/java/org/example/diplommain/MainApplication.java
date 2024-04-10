@@ -22,7 +22,6 @@ public class MainApplication extends Application {
         stage.setTitle("SISP");
         stage.setScene(scene);
         stage.show();
-
     }
 
 }

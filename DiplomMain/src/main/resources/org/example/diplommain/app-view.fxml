@@ -6,7 +6,10 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
@@ -16,10 +19,9 @@
          <children>
             <ToolBar layoutY="-6.0" prefHeight="40.0" prefWidth="1200.0">
               <items>
-                  <Button fx:id="buttonGetInfo" mnemonicParsing="false" onAction="#onLoadData" text="Get Info" />
-                  <Button fx:id="buttonCreateNewInfo" onAction="#onCreateNewData" text="New Info" />
-                  <Button fx:id="buttonGetInfoFromDB" onAction="#onLoadFromDB" text="Load Info"/>
-
+                  <Button fx:id="buttonGetInfo" mnemonicParsing="false" onAction="#onLoadData" text="Загрузить данные" />
+                  <Button fx:id="buttonCreateNewInfo" onAction="#onCreateNewData" text="Новые данные" />
+                  <Button fx:id="buttonSaveDataToDB" mnemonicParsing="false" onAction="#onSaveDataToDB" text="Сохранить в базу данных" />
               </items>
             </ToolBar>
             <TabPane fx:id="tabPane" layoutY="321.0" prefHeight="465.0" prefWidth="1200.0" tabClosingPolicy="UNAVAILABLE">
@@ -54,7 +56,7 @@
                           </TableView>
                       </content>
                   </Tab>
-                  <Tab fx:id="tab6" text="Untitled Tab">
+                  <Tab fx:id="tab6" text="Матрица интенсивностей на t">
                       <content>
                           <TableView fx:id="tableView6" prefHeight="200.0" prefWidth="200.0">
                           </TableView>
@@ -62,9 +64,45 @@
                   </Tab>
               </tabs>
             </TabPane>
-            <HBox fx:id="inputKBox" layoutX="80.0" layoutY="43.0" prefHeight="40.0" prefWidth="1106.0" />
-            <HBox fx:id="textFieldBox" layoutX="80.0" layoutY="83.0" prefHeight="100.0" prefWidth="1106.0" />
-            <VBox fx:id="buttonBox" layoutX="14.0" layoutY="43.0" prefHeight="264.0" prefWidth="59.0" />
+            <AnchorPane layoutX="14.0" layoutY="34.0" prefHeight="275.0" prefWidth="1176.0">
+               <children>
+                  <HBox fx:id="inputKBox" layoutX="99.0" layoutY="14.0" prefHeight="40.0" prefWidth="1055.0" />
+                  <VBox fx:id="buttonBox" layoutY="14.0" prefHeight="242.0" prefWidth="98.0" />
+                  <AnchorPane fx:id="errorBox" layoutX="955.0" layoutY="246.0" prefHeight="31.0" prefWidth="221.0" />
+                  <AnchorPane layoutX="80.0" layoutY="246.0" prefHeight="31.0" prefWidth="524.0" />
+                  <GridPane fx:id="textFieldBox" layoutX="101.0" layoutY="72.0" prefHeight="74.0" prefWidth="1055.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                  </GridPane>
+                  <GridPane fx:id="timeTextFieldBox" layoutX="101.0" layoutY="162.0" prefHeight="74.0" prefWidth="1055.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                  </GridPane>
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
    </children>
