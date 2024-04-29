@@ -1,17 +1,15 @@
 package org.example.diplommain;
 
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import java.text.DecimalFormat;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.UnaryOperator;
@@ -33,6 +31,8 @@ public class AppController {
     private HBox inputKBox;
     @FXML
     private Button buttonGetInfo;
+    @FXML
+    private Button buttonSaveExcel;
     @FXML
     private TableView<DataModel> tableView1;
     @FXML
@@ -157,7 +157,7 @@ public class AppController {
         });
     }
 
-    public void getCalculation1() {
+    public void getCalculation1() {     // показ исходных данных
         tableView1.getColumns().clear();
 
         // добавление столбцов
@@ -171,7 +171,7 @@ public class AppController {
         tableView1.setItems(dataList);
     }
 
-    public void getCalculation2() {
+    public void getCalculation2() {         // расчет пассажирообмен di/k
         tableView2.getColumns().clear();
         TableColumn<DataModel, Double> numСolumn = new TableColumn<>("Пассажирообмен(di)");
         TableColumn<DataModel, Double> calculatedСolumn = new TableColumn<>("Пассажирообмен(di)/k");
@@ -181,7 +181,7 @@ public class AppController {
         tableView2.setItems(dataList);
     }
 
-    public void getCalculation3() {
+    public CalculationResult getCalculation3() {          // расчет матрицы привлекательности P
         tableView3.getColumns().clear();
         ArrayList<Double> list = new ArrayList<>();
         for (DataModel data : dataList) {
@@ -212,9 +212,10 @@ public class AppController {
         }
         tableView3.setItems(data);
         list.clear();
+        return new CalculationResult(data, matrix);
     }
 
-    public ObservableList<Double[]> getCalculation4() {
+    public CalculationResult getCalculation4() {        // расчет матрицы распределения объемов корреспонденций pij*di/k
         tableView4.getColumns().clear();
         ArrayList<Double> list = new ArrayList<>();
         for (DataModel data : dataList) {
@@ -257,10 +258,10 @@ public class AppController {
         tableView4.setItems(data);
 
         list.clear();
-        return data;
+        return new CalculationResult(data, matrix);
     }
 
-    public void getCalculation5(){
+    public void getCalculation5(){                        // Показ временных показателей
         tableView5.getColumns().clear();
         TableColumn<DataTimeModel, Double> timenumcolumn = new TableColumn<>("Пассажирообмен часового интервала");
         TableColumn<DataTimeModel, Double> koefcolumn = new TableColumn<>("Весовые коэффиценты");
@@ -275,7 +276,7 @@ public class AppController {
         tableView5.setItems(dataTimeList);
     }
 
-    public ObservableList<Double[]> getCalculation6(){
+    public CalculationResult getCalculation6(){              // Расчет матрицы интенсивностей на часовой интервал t
         tableView6.getColumns().clear();
         double wt = 0.015997;
         ArrayList<Double> list = new ArrayList<>();
@@ -320,11 +321,13 @@ public class AppController {
 
         tableView6.setItems(data);
         list.clear();
-        return data;
+        return new CalculationResult(data, matrix);
     }
     @FXML
     public void onSaveDataToDB(){
-        Database.saveDataToDatabase(getCalculation6());
+        CalculationResult calculationResult = getCalculation6(); // Получение результата расчета
+        ObservableList<Double[]> data = calculationResult.getData(); // Получение данных из результата
+        Database.saveDataToDatabase(data); // Сохранение данных в базу данных
     }
 
     private double[][] buildMatrix( List<Double> values) {              //функций создания матрицы
@@ -429,5 +432,24 @@ public class AppController {
         inputKBox.getChildren().clear();
         textFieldBox.getChildren().clear();
         timeTextFieldBox.getChildren().clear();
+    }
+
+    @FXML
+    public void onSaveToExcel(){
+        try {
+            // Запись матрицы в Excel файл
+            CalculationResult calculationResult = getCalculation3();
+            double[][] matrix = calculationResult.getMatrix();
+            ExcelTableCreator.writeMatrixToExcel(matrix, "A:/SISP/Tables.xlsx","Матрица привлекательности");
+            calculationResult = getCalculation4();
+            matrix = calculationResult.getMatrix();
+            ExcelTableCreator.writeMatrixToExcel(matrix, "A:/SISP/Tables.xlsx","Матрица распределения объемов корреспонденций");
+            calculationResult = getCalculation6();
+            matrix = calculationResult.getMatrix();
+            ExcelTableCreator.writeMatrixToExcel(matrix, "A:/SISP/Tables.xlsx","Матрица интенсивностей на часовой интервал");
+            System.out.println("Матрица успешно записана в Excel файл.");
+        } catch (IOException e) {
+            System.err.println("Ошибка при записи матрицы в Excel файл: " + e.getMessage());
+        }
     }
 }
