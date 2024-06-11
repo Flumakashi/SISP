@@ -10,35 +10,47 @@ import java.io.FileOutputStream;
 
 public class ExcelTableCreator {
     public static void writeMatrixToExcel(double[][] matrix, String filePath, String sheetName) throws IOException {
-        FileInputStream fis = new FileInputStream(filePath);
-        Workbook workbook = WorkbookFactory.create(fis);
-        // Create a Sheet
-        Sheet sheet = workbook.getSheet(sheetName);
-        if(sheet == null){
-            sheet = workbook.createSheet(sheetName);
-        } else {
-            workbook.removeSheetAt(workbook.getSheetIndex(sheet));
-            sheet = workbook.createSheet(sheetName);
+        Workbook workbook;
+        FileInputStream fis = null;
+
+        try {
+            // Открываем существующий файл, если он существует
+            fis = new FileInputStream(filePath);
+            workbook = WorkbookFactory.create(fis);
+        } catch (IOException e) {
+            // Если файл не существует, создаем новый Workbook
+            workbook = WorkbookFactory.create(true);
+        } finally {
+            if (fis != null) {
+                fis.close();
+            }
         }
 
-        int startRow = 0;
+        // Проверка существования листа
+        Sheet sheet = workbook.getSheet(sheetName);
+        if (sheet != null) {
+            // Удаление существующего листа
+            int sheetIndex = workbook.getSheetIndex(sheet);
+            workbook.removeSheetAt(sheetIndex);
+        }
 
-        // Write data to cells
+        // Создание нового листа
+        sheet = workbook.createSheet(sheetName);
+
+        // Запись данных в ячейки
         for (int rowIndex = 0; rowIndex < matrix.length; rowIndex++) {
-            Row row = sheet.createRow(startRow + rowIndex);
+            Row row = sheet.createRow(rowIndex);
             for (int colIndex = 0; colIndex < matrix[rowIndex].length; colIndex++) {
                 Cell cell = row.createCell(colIndex);
                 cell.setCellValue(matrix[rowIndex][colIndex]);
             }
         }
 
-        // Write the Workbook to the file system
-        try (FileOutputStream outputStream = new FileOutputStream(filePath)) {
-            workbook.write(outputStream);
+        // Сохранение Workbook в файловую систему
+        try (FileOutputStream fos = new FileOutputStream(filePath)) {
+            workbook.write(fos);
         }
 
-        // Close the Workbook
         workbook.close();
-        fis.close();
     }
 }

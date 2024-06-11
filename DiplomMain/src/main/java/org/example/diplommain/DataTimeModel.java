@@ -7,12 +7,13 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 public class DataTimeModel {
 
-    private final DoubleProperty timenum;
+    private final DoubleProperty passengerExchange;
     private final IntegerProperty id;
 
     public DataTimeModel(int id, double timenum) {
+
         this.id = new SimpleIntegerProperty(id);
-        this.timenum = new SimpleDoubleProperty(timenum);
+        this.passengerExchange = new SimpleDoubleProperty(timenum);
     }
 
     public int getId() {
@@ -20,13 +21,21 @@ public class DataTimeModel {
     }
 
 
-    public double getTimeNum(){return timenum.get();}
+    public double getTimeNum(){return passengerExchange.get();}
 
     public IntegerProperty getIdProperty() {
         return id;
     }
-    public DoubleProperty getTimeNumProperty(){
-        return timenum;
+    public DoubleProperty getPassengerExchangeProperty(){
+        return passengerExchange;
+    }
+
+    public int getTimeId() {
+        return id.get();
+    }
+
+    public double getPassengerExchange() {
+        return passengerExchange.get();
     }
 
 

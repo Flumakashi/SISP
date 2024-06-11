@@ -1,8 +1,6 @@
 package org.example.diplommain;
 import javafx.collections.ObservableList;
 
-import java.util.*;
-
 public class CalculationResult {
     private ObservableList<Double[]> data;
     private double[][] matrix;
